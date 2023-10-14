@@ -13,7 +13,8 @@ export const validateData = (email, password, isName, name) => {
     if (!isEmailValid) return "Email is not valid";
     if (!isPasswordValid) return "Password is not valid";
     if (isName) {
-        if (name.length == 0) return "Name field can't be empty";
+        if (name.length === 0) return "Name field can't be empty";
+        if (name.length < 4) return "Invalid Name field";
     }
     return null;
 }

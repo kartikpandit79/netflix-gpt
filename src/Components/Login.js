@@ -1,6 +1,8 @@
-import React, { useRef, useState } from 'react'
-import Header from './Header'
-import { validateData } from '../Utils/validate'
+import React, { useRef, useState } from 'react';
+import Header from './Header';
+import { validateData } from '../Utils/validate';
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from '../Utils/firebase'
 
 const Login = () => {
 
@@ -18,12 +20,39 @@ const Login = () => {
 
     const handleButtonValidate = (e) => {
         e.preventDefault();
-        let err = validateData(email.current.value, password.current.value, !isSignInForm, name?.current?.value)
-        // let err = isSignInForm ?
-        //     validateData(email.current.value, password.current.value, !isSignInForm) :
-        //     validateData(email.current.value, password.current.value, !isSignInForm , name?.current?.value)
-        console.log("err", err);
+        let enteredEmail = email.current.value;
+        let enteredPassword = password.current.value;
+        let enteredName = name?.current?.value
+        let err = validateData(enteredEmail, enteredPassword, !isSignInForm, enteredName)
         setErrorMsg(err);
+        if (err) return;
+        if (!isSignInForm) {
+            // Sign Up
+            createUserWithEmailAndPassword(auth, enteredEmail, enteredPassword)
+                .then(userCred => {
+                    console.log("user cred", userCred);
+                }).catch(error => {
+                    console.log(error, "error");
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                    setErrorMsg(errorCode + "-" + errorMessage)
+                })
+        }
+        else {
+            // Sign In
+            signInWithEmailAndPassword(auth, enteredEmail, enteredPassword)
+                .then((userCredential) => {
+                    // Signed in 
+                    const user = userCredential.user;
+                    console.log(user);
+                })
+                .catch((error) => {
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                    setErrorMsg(errorCode + "-" + errorMessage)
+                });
+        }
+
     }
 
 
