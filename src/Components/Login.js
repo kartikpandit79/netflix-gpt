@@ -2,16 +2,17 @@ import React, { useRef, useState } from 'react';
 import Header from './Header';
 import { validateData } from '../Utils/validate';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "firebase/auth";
-import { auth } from '../Utils/firebase'
-import { useNavigate } from 'react-router-dom';
+import { auth } from '../Utils/firebase';
 import { useDispatch } from 'react-redux';
 import { addUsers } from '../Utils/userSlice';
+import { WALL_IMG, AVATAR } from "../Utils/constant";
+
+
 
 const Login = () => {
 
     const [isSignInForm, setIsSignInForm] = useState(true);
     const [errorMsg, setErrorMsg] = useState("");
-    const navigate = useNavigate();
     const dispatch = useDispatch();
 
     const name = useRef(null);
@@ -35,15 +36,15 @@ const Login = () => {
             // Sign Up
             createUserWithEmailAndPassword(auth, enteredEmail, enteredPassword)
                 .then(userCred => {
-                    // console.log("user cred sign up", userCred);
+                    console.log("user cred sign up", userCred);
                     const userDetails = userCred.user
                     updateProfile(userDetails, {
                         displayName: enteredName,
-                        photoURL: "https://financialexpresswpcontent.s3.amazonaws.com/uploads/2018/05/modified-royal-enfield-bullet-agira-main-image.jpg"
+                        photoURL:  AVATAR 
                     }).then(() => {
+                        console.log("auth.currentUser", auth);
                         const { uid, email, displayName, photoURL } = auth.currentUser;
-                        dispatch(addUsers({uid, email, displayName, photoURL}));
-                        navigate("/browse")
+                        dispatch(addUsers({ uid, email, displayName, photoURL }));
                     }).catch((error) => {
                         // console.log("update profile error", error);
                         setErrorMsg(error)
@@ -60,8 +61,7 @@ const Login = () => {
             signInWithEmailAndPassword(auth, enteredEmail, enteredPassword)
                 .then((userCredential) => {
                     // Signed in 
-                    const user = userCredential.user;
-                    navigate("/")
+                    // const user = userCredential.user;
                     // console.log("sign in", user);
                 })
                 .catch((error) => {
@@ -78,7 +78,7 @@ const Login = () => {
         <div  >
             <Header />
             <div className='absolute '>
-                <img src="https://assets.nflxext.com/ffe/siteui/vlv3/ab180a27-b661-44d7-a6d9-940cb32f2f4a/7fb62e44-31fd-4e1f-b6ad-0b5c8c2a20ef/IN-en-20231009-popsignuptwoweeks-perspective_alpha_website_small.jpg"
+                <img src={WALL_IMG}
                     alt='logo' className='h-full'
                 />
             </div>

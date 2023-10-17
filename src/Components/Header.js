@@ -1,20 +1,37 @@
-import React from 'react'
+import React, { useEffect } from 'react';
+import { onAuthStateChanged } from "firebase/auth";
+import { addUsers, removeUsers } from "../Utils/userSlice";
 import { auth } from '../Utils/firebase';
 import { useNavigate } from 'react-router-dom';
 import { signOut } from 'firebase/auth';
 import { useDispatch, useSelector } from 'react-redux';
-import { removeUsers } from '../Utils/userSlice';
-
+import { logo } from "../Utils/constant"
 const Header = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const user = useSelector(store => store.user)
+    const user = useSelector(store => store.user);
+
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(auth, (user) => {
+            if (user) {
+                // console.log("onAuthStateChange SignIN/UP", user);
+                const { uid, email, displayName, photoURL } = user;
+                dispatch(addUsers({ uid, email, displayName, photoURL }));
+                navigate("/browse");
+            } else {
+                // console.log("onAuthStateChange SignOUT")
+                dispatch(removeUsers());
+                navigate("/");
+            }
+        });
+        return () => {
+            unsubscribe()
+        }
+    }, [])
 
     const handleSignOut = () => {
         signOut(auth).then(() => {
             // Sign-out successful.
-            navigate("/");
-            dispatch(removeUsers());
 
         }).catch((error) => {
             // An error happened.
@@ -23,12 +40,12 @@ const Header = () => {
         });
     }
 
-    const handleHomePage = () => {
-        navigate("/")
-    }
-    const handleBrowsePage = () => {
-        navigate("/browse")
-    }
+    // const handleHomePage = () => {
+    //     navigate("/")
+    // }
+    // const handleBrowsePage = () => {
+    //     navigate("/browse")
+    // }
 
 
     return (
@@ -36,11 +53,10 @@ const Header = () => {
             {/* <button className='text-white bold' onClick={handleHomePage}>left</button>
             <button className='text-white bold' onClick={handleBrowsePage}>Right</button> */}
             <img className='w-44'
-                src='https://cdn.cookielaw.org/logos/dd6b162f-1a32-456a-9cfe-897231c7763c/4345ea78-053c-46d2-b11e-09adaef973dc/Netflix_Logo_PMS.png'
+                src={logo}
                 alt='logo'
             />
             {user && <div className='flex p-2 mx-2'>
-                {console.log(user)}
                 <img className='w-14 h-14 rounded-xl'
                     alt='usericon'
                     src={user?.photoURL}
