@@ -13,5 +13,9 @@ export const API_OPTIONS = {
 };
 
 export const TMDB_GET_MOVIES = 'https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1';
+export const TMDB_GET_POPULAR_MOVIES = 'https://api.themoviedb.org/3/movie/popular';
+export const TMDB_GET_TOP_RATED_MOVIES = 'https://api.themoviedb.org/3/movie/top_rated';
 
 export const PLAY_BUTTON = "https://cdn-icons-png.flaticon.com/512/27/27223.png";
+
+export const IMG_CDN_URL = "https://image.tmdb.org/t/p/w500"
