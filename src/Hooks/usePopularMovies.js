@@ -14,10 +14,10 @@ const usePopularMovies = () => {
         try {
             const data = await fetch(TMDB_GET_POPULAR_MOVIES, API_OPTIONS)
             const jsonData = await data.json();
-            console.log("***********", jsonData)
+            // console.log("***********", jsonData)
             dispatch(addPopularMovies(jsonData.results))
         } catch (err) {
-            console.log("====<><><><", err)
+            // console.log("====<><><><", err)
         }
     }
 }

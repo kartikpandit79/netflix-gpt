@@ -14,10 +14,10 @@ const UseTopRatedMovies = () => {
         try {
             const data = await fetch(TMDB_GET_TOP_RATED_MOVIES, API_OPTIONS)
             const jsonData = await data.json();
-            console.log("***********", jsonData)
+            // console.log("***********", jsonData)
             dispatch(addTopRatedMovies(jsonData.results))
         } catch (err) {
-            console.log("====<><><><", err)
+            // console.log("====<><><><", err)
         }
     }
 }

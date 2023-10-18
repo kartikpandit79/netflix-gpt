@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux'
 
 const SecondaryContainer = () => {
   const movies = useSelector(store => store.movies);
-  console.log("movies secondary container", movies);
+  // console.log("movies secondary container", movies);
   return (
     <div className="bg-black">
       <div className="-mt-64 relative z-20">

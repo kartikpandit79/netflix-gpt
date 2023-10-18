@@ -18,4 +18,9 @@ export const TMDB_GET_TOP_RATED_MOVIES = 'https://api.themoviedb.org/3/movie/top
 
 export const PLAY_BUTTON = "https://cdn-icons-png.flaticon.com/512/27/27223.png";
 
-export const IMG_CDN_URL = "https://image.tmdb.org/t/p/w500"
+export const IMG_CDN_URL = "https://image.tmdb.org/t/p/w500";
+
+export const SUPPORTED_LANG = [
+    { name: "English", identifier: "en" },
+    { name: "Hindi", identifier: "hindi" },
+    { name: "Spanish", identifier: "spanish" }]

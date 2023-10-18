@@ -20,7 +20,7 @@ const Login = () => {
     const password = useRef(null);
 
     const toggleSignInForm = () => {
-        // console.log("clicked");
+        // // console.log("clicked");
         setIsSignInForm(!isSignInForm)
     }
 
@@ -36,21 +36,21 @@ const Login = () => {
             // Sign Up
             createUserWithEmailAndPassword(auth, enteredEmail, enteredPassword)
                 .then(userCred => {
-                    console.log("user cred sign up", userCred);
+                    // console.log("user cred sign up", userCred);
                     const userDetails = userCred.user
                     updateProfile(userDetails, {
                         displayName: enteredName,
                         photoURL:  AVATAR 
                     }).then(() => {
-                        console.log("auth.currentUser", auth);
+                        // console.log("auth.currentUser", auth);
                         const { uid, email, displayName, photoURL } = auth.currentUser;
                         dispatch(addUsers({ uid, email, displayName, photoURL }));
                     }).catch((error) => {
-                        // console.log("update profile error", error);
+                        // // console.log("update profile error", error);
                         setErrorMsg(error)
                     });
                 }).catch(error => {
-                    // console.log(error, "error");
+                    // // console.log(error, "error");
                     const errorCode = error.code;
                     const errorMessage = error.message;
                     setErrorMsg(errorCode + "-" + errorMessage)
@@ -62,7 +62,7 @@ const Login = () => {
                 .then((userCredential) => {
                     // Signed in 
                     // const user = userCredential.user;
-                    // console.log("sign in", user);
+                    // // console.log("sign in", user);
                 })
                 .catch((error) => {
                     const errorCode = error.code;

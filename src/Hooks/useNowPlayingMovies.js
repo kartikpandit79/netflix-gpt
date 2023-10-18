@@ -14,7 +14,7 @@ const useNowPlayingMovies = () => {
         try {
             const data = await fetch(TMDB_GET_MOVIES, API_OPTIONS)
             const jsonData = await data.json();
-            console.log("***********>>>>>>>>>>>>>>>", jsonData)
+            // console.log("***********>>>>>>>>>>>>>>>", jsonData)
             dispatch(addNowPlayingMovies(jsonData.results))
         } catch (err) {
             console.error("====<><><><", err)
