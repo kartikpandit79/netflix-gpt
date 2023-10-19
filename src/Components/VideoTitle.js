@@ -3,13 +3,13 @@ import { PLAY_BUTTON } from '../Utils/constant'
 
 const VideoTitle = ({ title, overview }) => {
     return (
-        <div className=' absolute w-screen aspect-video pt-[10%] px-24  text-white bg-gradient-to-r from-black'>
-            <h1 className='text-6xl font-bold'>{title}</h1>
-            <p className='py-6 w-1/4 text-lg'>{overview}</p>
-            <div className=' flex'>
-                <button className=' flex mx-2 font-bold bg-white text-black p-4 px-12 text-2xl rounded-lg hover:bg-opacity-80 '>
-                    <img className='w-8 p-1' src={PLAY_BUTTON} /> Play</button>
-                <button className='mx-2 bg-gray-500 text-white p-4 px-12 text-2xl bg-opacity-50 rounded-lg hover:bg-opacity-20'>More Info</button>
+        <div className=' absolute w-screen aspect-video pt-[165px] md:pt-[10%] px-6 md:px-24  text-white bg-gradient-to-r from-black'>
+            <h1 className='text-xl md:text-6xl font-bold'>{title}</h1>
+            <p className='hidden md:inline-block py-6 w-1/4 text-lg'>{overview}</p>
+            <div className=' flex mt-[10px] md:m-0'>
+                <button className=' flex mx-2 font-bold bg-white text-black py-1 md:py-4 px-2 md:px-12 text-sm md:text-2xl rounded-lg hover:bg-opacity-80 '>
+                    <img className='w-[1.2rem] p-1' src={PLAY_BUTTON} /> Play</button>
+                <button className=' hidden md:inline-block mx-2 bg-gray-500 text-white p-4 px-12 text-2xl bg-opacity-50 rounded-lg hover:bg-opacity-20'>More Info</button>
             </div>
         </div>
     )

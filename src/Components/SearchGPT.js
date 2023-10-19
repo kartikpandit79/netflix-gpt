@@ -5,15 +5,18 @@ import { WALL_IMG } from '../Utils/constant'
 
 const SearchGPT = () => {
     return (
-        <div>
-            <div className='absolute -z-10'>
+        <>
+            <div className='fixed -z-10'>
                 <img src={WALL_IMG}
-                    alt='logo' className='h-full'
+                    alt='logo' className='h-screen object-cover md:h-full'
                 />
             </div>
-            <GptSearchBar />
-            <GptMovieSuggestion />
-        </div>
+            <div className='pt-[40%] md:pt-[0]'>
+                <GptSearchBar />
+                <GptMovieSuggestion />
+            </div>
+        </>
+
     )
 }
 
