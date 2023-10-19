@@ -1,5 +1,8 @@
 {
   "projects": {
-    "default": "netflix-gpt-3e82d"
-  }
+    "default": "gptnetfilx",
+    "deployment": "gptnetfilx"
+  },
+  "targets": {},
+  "etags": {}
 }

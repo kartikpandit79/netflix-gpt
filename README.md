@@ -67,3 +67,11 @@
 
 # Project Setup
 - Before starting the project please add .env file and add TMDB and OPENAI KEY into it.
+
+# Firebase
+    - npm i firebase
+    - npm install -g firebase-tools
+    - firebase login
+    - firebase init
+    - npm run build
+    - firebase deploy
